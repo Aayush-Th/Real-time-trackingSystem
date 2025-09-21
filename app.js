@@ -15,6 +15,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Socket.IO connection
 io.on('connection', (socket) => {
+    socket.on("send-location", (data)=>{
+        io.emit("receive-location", {id: socket.id, ...data});
+    });
   console.log('Socket connected:', socket.id);
 });
 
