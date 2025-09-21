@@ -18,7 +18,9 @@ io.on('connection', (socket) => {
     socket.on("send-location", (data)=>{
         io.emit("receive-location", {id: socket.id, ...data});
     });
-  console.log('Socket connected:', socket.id);
+   socket.on("disconnect",()=>{
+    io.emit("user-disconnected",socket.id);
+   });
 });
 
 // Route
